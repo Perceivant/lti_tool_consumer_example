@@ -85,7 +85,7 @@ post '/grade_passback' do
   sourcedid = req.lis_result_sourcedid
 
   # todo - create some simple key management system
-  consumer = IMS::LTI::ToolConsumer.new('test', 'secret')
+  consumer = IMS::LTI::ToolConsumer.new(ENV['OAUTH_KEY'] || 'test', ENV['OAUTH_SECRET'] || 'secret')
 
   if consumer.valid_request?(request)
     if consumer.request_oauth_timestamp.to_i - Time.now.utc.to_i > 60*60

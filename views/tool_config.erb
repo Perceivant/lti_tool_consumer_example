@@ -20,11 +20,11 @@
     </tr>
     <tr>
       <td>Consumer Key</td>
-      <td><input name="consumer_key" type="text" value="test"/></td>
+      <td><input name="consumer_key" type="text" value="<%= ENV['OAUTH_KEY'] || 'test' %>"/></td>
     </tr>
     <tr>
       <td>Consumer Secret</td>
-      <td><input name="consumer_secret" type="text" value="secret"/></td>
+      <td><input name="consumer_secret" type="text" value="<%= ENV['OAUTH_SECRET'] || 'secret' %>"/></td>
     </tr>
     <tr>
       <td>Resource Link ID</td>
