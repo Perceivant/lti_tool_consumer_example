@@ -43,14 +43,17 @@ post '/tool_launch' do
 
   # Set some launch data from: http://www.imsglobal.org/LTI/v1p1pd/ltiIMGv1p1pd.html#_Toc309649684
   # Only this first one is required, the rest are recommended
-  @consumer.resource_link_id = "thisisuniquetome"
+  @consumer.resource_link_id = params["resource_link_id"]
   @consumer.launch_presentation_return_url = host + '/tool_return'
   @consumer.lis_person_name_given = session['username']
   @consumer.user_id = Digest::MD5.hexdigest(session['username'])
-  @consumer.roles = "learner"
-  @consumer.context_id = "bestcourseever"
-  @consumer.context_title = "Example Sinatra Tool Consumer"
-  @consumer.tool_consumer_instance_name = "Frankie"
+  @consumer.roles = params["roles"]
+  @consumer.context_id = params["context_id"]
+  @consumer.context_title = params["context_title"]
+  @consumer.context_label = params["context_label"]
+  @consumer.tool_consumer_instance_name = params["tool_consumer_instance_name"]
+  @consumer.set_custom_param("course_id", params["course_id"])
+  @consumer.set_custom_param("canvas_course_id", params["course_id"])
 
   if params['assignment']
     @consumer.lis_outcome_service_url = host + '/grade_passback'
